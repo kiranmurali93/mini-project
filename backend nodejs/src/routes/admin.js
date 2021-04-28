@@ -13,6 +13,9 @@ var router = express.Router();
 
 var Admin = require('../models/admin');
 
+// middleware
+const adminMiddleware = require('../middleware/adminMiddleware')
+
 router.post('/test', (req, res)=>{
     res.send(req.body)
 })
@@ -69,6 +72,8 @@ router.post('/admin/login',(req, res) =>{
     });
 });
 
-
+router.get('/admin/dashboard', adminMiddleware,(req, res)=>{
+  res.send(req.user)
+})
 
 module.exports = router;
